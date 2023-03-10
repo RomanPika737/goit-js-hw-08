@@ -22,7 +22,7 @@ function onMessageInput(event) {
     try {
    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormData));
   } catch (error) {
-    console.error("Set state error: ", error.message);
+    console.log("Set state error: ", error.message);
   }
     
 };
@@ -36,7 +36,7 @@ function populateFeedbackForm() {
         })
     }
   } catch (error) {
-    console.error("Set state error: ", error.message);
+    console.log("Set state error: ", error.message);
   }
     
 };

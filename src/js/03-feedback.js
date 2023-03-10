@@ -7,12 +7,13 @@ const message = document.querySelector('[name="message"]');
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 const feedbackFormData = {};
 
-message.addEventListener('input', throttle(onFeedbackFormInput, 500));
+message.addEventListener('input', throttle(onMessageInput, 500));
+// feedbackForm.addEventListener('input', throttle(onMessageInput, 500));
 feedbackForm.addEventListener('submit', onFeedbackFormSubmit);
 
 populateFeedbackForm();
 
-function onFeedbackFormInput(event) {
+function onMessageInput(event) {
     // event.preventDefault();
     const formData = new FormData(feedbackForm);
     formData.forEach((value, name) => feedbackFormData[name] = value);

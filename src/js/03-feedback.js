@@ -29,8 +29,8 @@ function onMessageInput(event) {
 
 function populateFeedbackForm() {
      try {
-    let localStorageData = (localStorage.getItem(LOCALSTORAGE_KEY));
-    if (localStorageData === null ? undefined : JSON.parse(localStorageData)) {
+    let localStorageData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+    if (localStorageData === null ? undefined : localStorageData) {
         Object.entries(localStorageData).forEach(([name, value]) => {
             feedbackForm.elements[name].value = value;
         })

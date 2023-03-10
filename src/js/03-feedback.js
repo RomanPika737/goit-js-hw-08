@@ -19,16 +19,26 @@ function onMessageInput(event) {
     formData.forEach((value, name) => feedbackFormData[name] = value);
     // console.log(feedbackFormData);
 
-    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormData));
+    try {
+   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormData));
+  } catch (error) {
+    console.error("Set state error: ", error.message);
+  }
+    
 };
 
 function populateFeedbackForm() {
-    let localStorageData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
-    if (localStorageData) {
+     try {
+    let localStorageData = (localStorage.getItem(LOCALSTORAGE_KEY));
+    if (localStorageData === null ? undefined : JSON.parse(localStorageData)) {
         Object.entries(localStorageData).forEach(([name, value]) => {
             feedbackForm.elements[name].value = value;
         })
     }
+  } catch (error) {
+    console.error("Set state error: ", error.message);
+  }
+    
 };
 
 function onFeedbackFormSubmit(event) {

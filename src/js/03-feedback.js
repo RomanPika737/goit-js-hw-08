@@ -7,8 +7,8 @@ const message = document.querySelector('[name="message"]');
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 const feedbackFormData = {};
 
-message.addEventListener('input', throttle(onMessageInput, 500));
-// feedbackForm.addEventListener('input', throttle(onMessageInput, 500));
+// message.addEventListener('input', throttle(onMessageInput, 500));
+feedbackForm.addEventListener('input', throttle(onMessageInput, 500));
 feedbackForm.addEventListener('submit', onFeedbackFormSubmit);
 
 populateFeedbackForm();
@@ -30,7 +30,7 @@ function onMessageInput(event) {
 function populateFeedbackForm() {
      try {
     let localStorageData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
-    if (localStorageData === null ? undefined : localStorageData) {
+    if (localStorageData) {
         Object.entries(localStorageData).forEach(([name, value]) => {
             feedbackForm.elements[name].value = value;
         })
@@ -44,9 +44,17 @@ function populateFeedbackForm() {
 function onFeedbackFormSubmit(event) {
   event.preventDefault();
 
+  feedbackFormData.email = email.value;
+  feedbackFormData.message = message.value;
+
   console.log(feedbackFormData);
+
 
   event.currentTarget.reset();
   localStorage.removeItem(LOCALSTORAGE_KEY);
 };
+
+
+
+
 
